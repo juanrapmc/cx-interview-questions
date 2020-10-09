@@ -21,14 +21,28 @@ offers = {
 
 class TestBasketPricer(TestCase):
 
-    def test(self):
-        self.assertTrue(True)
-
     def test_get_basket_total_no_offers(self):
         basket = [
-            (101, 3),
-            (150, 2)
+            (101, 4),
+            (150, 1)
         ]
-        bpricer = BasketPricer(catalogue, basket=basket)
-        self.assertEqual(5.37, bpricer.computeTotal())
-        pass
+        bPricer = BasketPricer(catalogue, basket=basket)
+        expectedComputation = {
+            'discount': 0,
+            'subtotal': 5.16,
+            'total': 5.16
+        }
+        self.assertEqual(expectedComputation, bPricer.computeBasket())
+
+    def test_get_basket_total_with_offers(self):
+        basket = [
+            (101, 4),
+            (150, 1)
+        ]
+        bPricer = BasketPricer(catalogue, offers, basket)
+        expectedComputation = {
+            'discount': 0.99,
+            'subtotal': 5.16,
+            'total': 4.17
+        }
+        self.assertEqual(expectedComputation, bPricer.computeBasket())
