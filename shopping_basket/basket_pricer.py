@@ -1,3 +1,4 @@
+import importlib
 
 
 class BasketPricer(object):
@@ -8,6 +9,12 @@ class BasketPricer(object):
         self.basket = basket
 
     def computeBasket(self):
+        """
+        Computes for the basket total (subtotal - discounts)
+
+        Returns:
+            A dictionary containing the computed subtotal, discount, and total
+        """
         summary = {
             'subtotal': 0,
             'discount': 0,
@@ -24,6 +31,12 @@ class BasketPricer(object):
         return summary
 
     def computeSubtotal(self):
+        """
+        Computes for the basket subtotal
+
+        Returns:
+            Amount for the items added in the basket
+        """
         subtotal = 0
         for item, qty in self.basket:
             if item in self.catalogue:
@@ -31,4 +44,10 @@ class BasketPricer(object):
         return subtotal
 
     def computeDiscount(self):
+        """
+        Computes for basket items total discount
+
+        Returns:
+            Amount to be discounted
+        """
         pass
