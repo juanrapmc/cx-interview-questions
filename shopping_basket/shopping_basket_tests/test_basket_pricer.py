@@ -11,7 +11,8 @@ catalogue = {
 }
 
 offers = {
-    101: [("BuyXGetXOffer", 2, 1),],
+    101: [("BuyXGetXOffer", 2, 1)],
+    150: [("BuyXGetXOffer", 3, 2)],
     200: [("PercentOffOffer", 25)],
     351: [("BuyXSetGetMinFree", 1)],
     352: [("BuyXSetGetMinFree", 1)],
@@ -38,6 +39,15 @@ class TestBasketPricer(TestCase):
             'discount': 0.99,
             'subtotal': 5.16,
             'total': 4.17
+        }
+        self.assertEqual(expectedComputation, bPricer.computeBasket())
+
+        basket = [(150, 5), (101, 5)]
+        bPricer = BasketPricer(catalogue, offers, basket)
+        expectedComputation = {
+            'discount': 3.39,
+            'subtotal': 10.95,
+            'total': 7.56
         }
         self.assertEqual(expectedComputation, bPricer.computeBasket())
 
