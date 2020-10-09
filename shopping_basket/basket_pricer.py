@@ -27,7 +27,7 @@ class BasketPricer(object):
             summary['discount'] = self.computeDiscount()
 
         summary['subtotal'] = self.computeSubtotal()
-        summary['total'] = summary['subtotal'] - summary['discount']
+        summary['total'] = round(summary['subtotal'] - summary['discount'], 2)
         return summary
 
     def computeSubtotal(self):
@@ -50,4 +50,15 @@ class BasketPricer(object):
         Returns:
             Amount to be discounted
         """
-        pass
+        discount = 0
+        offers = set()
+        for item, _ in self.basket:
+            if item in self.offers:
+                for offer in self.offers[item]:
+                    offers.add(offer[0])
+
+        module = importlib.import_module('offers')
+        for offer in offers:
+            OfferClass = getattr(module, offer)
+            discount += OfferClass(self.catalogue, self.offers, self.basket).computeDiscount()
+        return discount
