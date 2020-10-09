@@ -48,5 +48,5 @@ class TestBasketPricer(TestCase):
 
     def test_get_basket_discount(self):
         basket = [ (101, 4), (150, 1) ]
-        bPricer = BasketPricer(catalogue, offers=offers)
+        bPricer = BasketPricer(catalogue, offers, basket)
         self.assertEqual(0.99, bPricer.computeDiscount())
