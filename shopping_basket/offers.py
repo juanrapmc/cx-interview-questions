@@ -16,8 +16,13 @@ class Offer(ABC):
 class PercentOffOffer(Offer):
 
     def computeDiscount(self):
-        pass
-
+        discount = 0
+        for item, qty in self.basket:
+            if item in self.offers:
+                for offer in self.offers[item]:
+                    if offer[0] == 'PercentOffOffer':
+                        discount += self.catalogue[item]['price'] * qty * (offer[1]/100)
+        return round(discount, 2)
 
 class BuyXGetXOffer(Offer):
 
