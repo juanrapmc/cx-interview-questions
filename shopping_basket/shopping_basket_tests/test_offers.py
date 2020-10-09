@@ -27,3 +27,11 @@ class TestOffers(TestCase):
         basket = [ (101, 6), (150, 1), (200, 1) ]
         buyGetOffer = BuyXGetXOffer(catalogue, offers, basket)
         self.assertEqual(1.98, buyGetOffer.computeDiscount())
+
+        basket = [ (101, 2), (150, 1), (200, 1) ]
+        buyGetOffer = BuyXGetXOffer(catalogue, offers, basket)
+        self.assertEqual(0, buyGetOffer.computeDiscount())
+
+        basket = [ (101, 5), (150, 1), (200, 1) ]
+        buyGetOffer = BuyXGetXOffer(catalogue, offers, basket)
+        self.assertEqual(0.99, buyGetOffer.computeDiscount())
