@@ -11,11 +11,11 @@ catalogue = {
 }
 
 offers = {
-    101: [("buyXgetX", 2, 1),],
-    200: [("percentOff", 25)],
-    351: [("buyXSetGetMinFree", 1)],
-    352: [("buyXSetGetMinFree", 1)],
-    353: [("buyXSetGetMinFree", 1)],
+    101: [("BuyXGetXOffer", 2, 1),],
+    200: [("PercentOffOffer", 25)],
+    351: [("BuyXSetGetMinFree", 1)],
+    352: [("BuyXSetGetMinFree", 1)],
+    353: [("BuyXSetGetMinFree", 1)],
 }
 
 
