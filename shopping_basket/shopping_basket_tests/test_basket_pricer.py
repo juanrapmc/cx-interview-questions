@@ -14,9 +14,9 @@ offers = {
     101: [("BuyXGetXOffer", 2, 1)],
     150: [("BuyXGetXOffer", 3, 2)],
     200: [("PercentOffOffer", 25)],
-    351: [("BuyXSetGetMinFree", 1)],
-    352: [("BuyXSetGetMinFree", 1)],
-    353: [("BuyXSetGetMinFree", 1)],
+    351: [("BuyXSetGetMinFree", 1, 3)], # id, buy X
+    352: [("BuyXSetGetMinFree", 1, 3)],
+    353: [("BuyXSetGetMinFree", 1, 3)],
 }
 
 

@@ -47,5 +47,35 @@ class BuyXGetXOffer(Offer):
 
 class BuyXSetGetMinFree(Offer):
 
-    def compute(self, offer, item, qty):
-        pass
+    def compute(self, offer_groups):
+        discount = 0
+        for group_id in offer_groups:
+            offer_group = offer_groups[group_id]
+            offer_group.sort(key=lambda x: x[2], reverse=True)
+            buy_amt = 0
+            for item in offer_group:
+                for _ in range(1, item[1]+1):
+                    buy_amt += 1
+                    if buy_amt == item[3]:
+                        discount += item[2]
+                        buy_amt = 0
+        return discount
+
+    def computeDiscount(self):
+        groups = {}
+        for item, qty in self.basket:
+            if item in self.offers:
+                for offer in self.offers[item]:
+                    if offer[0] == type(self).__name__:
+                        if offer[1] in groups:
+                            groups[offer[1]].append((
+                                item, qty,
+                                self.catalogue[item]['price'],
+                                offer[2]))
+                        else:
+                            groups[offer[1]] = [(
+                                item, qty,
+                                self.catalogue[item]['price'],
+                                offer[2])]
+
+        return self.compute(groups)
