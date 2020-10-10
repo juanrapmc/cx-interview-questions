@@ -1,5 +1,5 @@
 from unittest import TestCase
-from offers import BuyXGetXOffer, PercentOffOffer
+from offers import BuyXGetXOffer, PercentOffOffer, BuyXSetGetMinFree
 from shopping_basket_tests.test_basket_pricer import catalogue, offers
 
 
@@ -35,3 +35,16 @@ class TestOffers(TestCase):
         basket = [ (101, 5), (150, 1), (200, 1) ]
         buyGetOffer = BuyXGetXOffer(catalogue, offers, basket)
         self.assertEqual(0.99, buyGetOffer.computeDiscount())
+
+    def test_buyXSetGetMinFree(self):
+        basket = [ (353, 3), (352, 1), (351, 2) ]
+        buyXSetMinFreeOffer = BuyXSetGetMinFree(catalogue, offers, basket)
+        self.assertEqual(5.5, buyXSetMinFreeOffer.computeDiscount())
+
+        basket = [ (353, 3) ]
+        buyXSetMinFreeOffer = BuyXSetGetMinFree(catalogue, offers, basket)
+        self.assertEqual(3.5, buyXSetMinFreeOffer.computeDiscount())
+
+        basket = [ (351, 1), (352, 1), (353, 1) ]
+        buyXSetMinFreeOffer = BuyXSetGetMinFree(catalogue, offers, basket)
+        self.assertEqual(2, buyXSetMinFreeOffer.computeDiscount())

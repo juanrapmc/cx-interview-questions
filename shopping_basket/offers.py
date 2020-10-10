@@ -43,3 +43,9 @@ class BuyXGetXOffer(Offer):
             if buy_amt % offer[1] == 0:
                 free_amt = offer[2]
         return self.catalogue[item]['price'] * free_total
+
+
+class BuyXSetGetMinFree(Offer):
+
+    def compute(self, offer, item, qty):
+        pass
