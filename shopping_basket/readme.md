@@ -124,3 +124,34 @@ This module allows computes for the subtotal, discounts, and total of a shopping
 * The `compute_discount` method (from base class) gets the discount for every item in the basket.
     * This calls another method `compute` which should be implemented by child classes
 * The `compute` method contains the logic to get the discount for a given item.
+
+## Sample Usage
+
+```python
+Python 3.8.2 (default, Apr 27 2020, 15:53:34)
+[GCC 9.3.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> from basket_pricer import BasketPricer
+>>>
+>>> catalogue = {
+...     101: {'name': 'Baked Beans', 'price': 0.99},
+...     150: {'name': 'Biscuits', 'price': 1.20},
+...     200: {'name': 'Sardines', 'price': 1.89},
+...     351: {'name': 'Shampoo (Small)', 'price': 2.00},
+   352:...     352: {'name': 'Shampoo (Medium)', 'price': 2.50},
+...     353: {'name': 'Shampoo (Large)', 'price': 3.50},
+... }
+>>> offers = {
+...     101: [{"offer_name": "BuyXGetXOffer", "buy_amount": 2, "free_amount": 1}],
+...     150: [{"offer_name": "BuyXGetXOffer", "buy_amount": 3, "free_amount": 2}],
+...     200: [{"offer_name": "PercentOffOffer", "percent": 25}],
+...     351: [{"offer_name": "BuyXSetGetMinFree", "group_id": 1, "buy_amount": 3}],
+...     352: [{"offer_name": "BuyXSetGetMinFree", "group_id": 1, "buy_amount": 3}],
+...     353: [{"offer_name": "BuyXSetGetMinFree", "group_id": 1, "buy_amount": 3}],
+... }
+>>> basket = [ (101, 4), (150, 1) ] # buying 4pcs of Baked Beans and 1pc of Biscuits"
+>>> BasketPricer(catalogue, offers, basket).computeBasket()
+{'subtotal': 5.16, 'discount': 0.99, 'total': 4.17}
+>>> # 1pc of Baked Beans for free, 3 pcs of Baked beans at original price, and 1pc of Biscuits at original price
+>>>
+```
