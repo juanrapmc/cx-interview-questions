@@ -37,7 +37,7 @@ class TestOffers(TestCase):
         self.assertEqual(0.99, buyGetOffer.computeDiscount())
 
     def test_buyXSetGetMinFree(self):
-        basket = [ (353, 3), (352, 1), (351, 2) ]
+        basket = [ (352, 1), (353, 3), (351, 2) ]
         buyXSetMinFreeOffer = BuyXSetGetMinFree(catalogue, offers, basket)
         self.assertEqual(5.5, buyXSetMinFreeOffer.computeDiscount())
 
@@ -48,3 +48,7 @@ class TestOffers(TestCase):
         basket = [ (351, 1), (352, 1), (353, 1) ]
         buyXSetMinFreeOffer = BuyXSetGetMinFree(catalogue, offers, basket)
         self.assertEqual(2, buyXSetMinFreeOffer.computeDiscount())
+
+        basket = [ (351, 3), (353, 3), (352, 3) ]
+        buyXSetMinFreeOffer = BuyXSetGetMinFree(catalogue, offers, basket)
+        self.assertEqual(8, buyXSetMinFreeOffer.computeDiscount())
