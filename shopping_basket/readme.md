@@ -42,7 +42,7 @@ This module allows computes for the subtotal, discounts, and total of a shopping
         ```
 
 * **offers**: Optional input. Mapping of offer to an item.
-    * **Offer classes**: Offers that can be mapped to an item. \* To add new offer classes see [Offers Factory]
+    * **Offer classes**: Offers that can be mapped to an item. \* To add new offer classes see [Offers Factory](#offers-factory)
         * **BuyXGetXOffer**: Get an amount free when the number of item reaches a target.
             * **Parameters**
                 * **buy_amount** - Target item quantity before giving a free amount of the same item.
@@ -117,7 +117,7 @@ This module allows computes for the subtotal, discounts, and total of a shopping
 * **compute_subtotal**: Returns the total amount of the basket without any discount
 * **compute_discount**: Returns the total amount to be discounted.
 
-## Offers Factory
+# Offers Factory
 
 * Responsible for creating the offers and how they are applied to the basket.
 * To add a new offer, the `Offer` class should be inherited.
