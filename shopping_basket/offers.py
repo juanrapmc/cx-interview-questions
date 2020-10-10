@@ -51,13 +51,13 @@ class BuyXSetGetMinFree(Offer):
         discount = 0
         for group_id in offer_groups:
             offer_group = offer_groups[group_id]
-            offer_group.sort(key=lambda x: x[2], reverse=True)
+            offer_group.sort(key=lambda x: x["price"], reverse=True)
             buy_amt = 0
             for item in offer_group:
-                for _ in range(1, item[1]+1):
+                for _ in range(1, item["qty"]+1):
                     buy_amt += 1
-                    if buy_amt == item[3]:
-                        discount += item[2]
+                    if buy_amt == item["buy_amount"]:
+                        discount += item["price"]
                         buy_amt = 0
         return discount
 
@@ -68,14 +68,18 @@ class BuyXSetGetMinFree(Offer):
                 for offer in self.offers[item]:
                     if offer["offer_name"] == type(self).__name__:
                         if offer["group_id"] in groups:
-                            groups[offer["group_id"]].append((
-                                item, qty,
-                                self.catalogue[item]['price'],
-                                offer["buy_amount"]))
+                            groups[offer["group_id"]].append({
+                                "item": item,
+                                "qty": qty,
+                                "price": self.catalogue[item]['price'],
+                                "buy_amount": offer["buy_amount"]
+                            })
                         else:
-                            groups[offer["group_id"]] = [(
-                                item, qty,
-                                self.catalogue[item]['price'],
-                                offer["buy_amount"])]
+                            groups[offer["group_id"]] = [{
+                                "item": item,
+                                "qty": qty,
+                                "price": self.catalogue[item]['price'],
+                                "buy_amount": offer["buy_amount"]
+                            }]
 
         return self.compute(groups)
