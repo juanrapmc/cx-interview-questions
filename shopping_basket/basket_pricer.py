@@ -55,7 +55,7 @@ class BasketPricer(object):
         for item, _ in self.basket:
             if item in self.offers:
                 for offer in self.offers[item]:
-                    offers.add(offer[0])
+                    offers.add(offer["offer_name"])
 
         module = importlib.import_module('offers')
         for offer in offers:

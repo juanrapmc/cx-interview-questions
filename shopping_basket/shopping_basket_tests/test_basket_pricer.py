@@ -11,12 +11,12 @@ catalogue = {
 }
 
 offers = {
-    101: [("BuyXGetXOffer", 2, 1)],
-    150: [("BuyXGetXOffer", 3, 2)],
-    200: [("PercentOffOffer", 25)],
-    351: [("BuyXSetGetMinFree", 1, 3)], # id, buy X
-    352: [("BuyXSetGetMinFree", 1, 3)],
-    353: [("BuyXSetGetMinFree", 1, 3)],
+    101: [{"offer_name": "BuyXGetXOffer", "buy_amount": 2, "free_amount": 1}],
+    150: [{"offer_name": "BuyXGetXOffer", "buy_amount": 3, "free_amount": 2}],
+    200: [{"offer_name": "PercentOffOffer", "percent": 25}],
+    351: [{"offer_name": "BuyXSetGetMinFree", "group_id": 1, "buy_amount": 3}],
+    352: [{"offer_name": "BuyXSetGetMinFree", "group_id": 1, "buy_amount": 3}],
+    353: [{"offer_name": "BuyXSetGetMinFree", "group_id": 1, "buy_amount": 3}],
 }
 
 
